@@ -17,7 +17,6 @@ Technologies:
 - CSS / Bootstrap 4 is used to display tables, buttons, panels.
 - JavaScript(JQuery) is used for drop-down lists.
 
-Screenshots
 ![Иллюстрация к проекту](https://github.com/alextar04/DjangoATP/raw/master/app/ATP/ATPapplication/static//gitPicture1.png)
 
 ![Иллюстрация к проекту](https://github.com/alextar04/DjangoATP/raw/master/app/ATP/ATPapplication/static//gitPicture2.png)
