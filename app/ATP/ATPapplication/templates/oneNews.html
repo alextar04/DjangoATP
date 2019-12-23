@@ -1,0 +1,25 @@
+{% extends 'basepage.html' %}
+
+{% block background %}
+      <style> body { background: url("/static/background.jpg");background-size: cover; } </style> 
+{% endblock %}
+
+  {% block title %}
+      {% for field in oneNews %}
+        {{ field.shortdescription }}
+      {% endfor %}
+  {% endblock %}
+
+
+{% block content %}
+    {% for field in oneNews %}
+    <p></p>
+    <div class="card" style="width: 48rem;margin:auto">
+  {% load static %}
+  <img src="{% static field.photo %}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">{{ field.textnews }}</p>
+  </div>
+  </div>
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'basepage.html' %}
+
+{% block background %}
+      <style> body { background: url("/static/aobackground.jpg"); background-size: cover;} </style> 
+{% endblock %}
+
+  {% block title %}
+      Create News
+  {% endblock %}
+
+{% block content %}
+<p style="text-align:center"><font size="5" color="White" face="Arial Black">Create your news here</font></p>
+  
+  <form action= "{% url 'news_create_url' %}" method="post">
+    {% csrf_token %}
+
+    <div class="form-group" style="width: 50%; margin: auto" >
+    <label for="shortdescription"></label>
+    <input type="text" class="form-control" id = "shortdescription" name = "shortdescription", placeholder = "What is your description?">
+    </div>
+
+    <div class="form-group" style="width: 50%; margin: auto">
+    <label for="text"></label>
+    <textarea type="text" class="form-control" id = "text" name = "text", rows="7" placeholder = "What is your text?"></textarea>
+    </div>
+
+    <div class="form-group" style="width: 50%; margin: auto">
+    <label for="photo"></label>
+    <input type="text" class="form-control" id = "photo" name = "photo", placeholder = "What is your photo?">
+    </div>
+ 
+    <p></p><center><button type="submit" class="btn btn-primary btn-lg" >OK</button> <a class="btn btn-primary btn-lg" href=" {% url 'all_news_url' %}" role="button">Cancel</a></center>
+  </form>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'basepage.html' %}
+
+  {% block title %}
+      ATP Tennis
+  {% endblock %}
+
+
+{% block content %}
+    {% for field in organization %}
+    <div class="jumbotron">
+  <h1 align="center" class="display-4">Association of Tennis Professionals</h1>
+  <table>
+  {% load static %}
+  <td><img src="{% static field.logo %}" width="440" height="210" alt="..."></td>
+  <td><hr class="my-4"><p class="card-text">{{ field.organizationinformation }}</p>
+  <a class="btn btn-primary btn-lg" href=" {% url 'info_url' %}" role="button">See more...</a></td>
+    </div>
+  </table>
+  <p></p>
+    <div class="card-group">
+      <div class="card">
+    {% load static %}
+    <img src="{% static field.face %}" class="card-img-top" alt="...">
+    {% endfor %}
+    <div class="card-body">
+      <h5 class="card-title">Players</h5>
+      <p class="card-text">Main actors</p>
+    <a href="{% url 'players_url' %}" class="card-link">See rating</a>
+    </div>
+  </div>
+    {% for field in grandslams %}
+<div class="card">
+  {% load static %}
+  <img src="{% static field.picture %}" class="card-img-top" width="200" height="200" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"> {{field.name}} </h5>
+      <p class="card-text">{{ field.description }}</p>
+      <div class="card-body">
+    <a href="{% url 'grandslam_url' slug=field.name %}" class="card-link">Visit</a>
+    </div>
+  </div>
+</div>
+  {% endfor %}
+{% endblock %}

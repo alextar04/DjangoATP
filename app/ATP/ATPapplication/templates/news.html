@@ -1,0 +1,33 @@
+{% extends 'basepage.html' %}
+
+
+{% block background %}
+      <style> body { background: url("/static/background1.jpg"); background-size: cover;} </style> 
+{% endblock %}
+
+
+  {% block title %}
+        ATP News
+  {% endblock %}
+
+
+{% block content %}
+<p style="text-align:center"><font size="5" color="White" face="Arial Black">News</font></p>
+<table class="table table-striped table-dark" style="width: 50%; margin: auto">
+  <tbody>
+    {% for field in news %}
+    <tr>
+      <td><a href=" {% url 'one_news_url' slug=field.id %} " class="list-group-item list-group-item-dark">
+      <h5 class="mb-1">  {{field.shortDescription}} </h5></a></td>
+      {% if request.user.is_authenticated and request.user.username != 'Player_writer' %}
+      <td><a class="btn btn-warning btn-lg" href="{% url 'news_update_url' slug=field.id %}" role="button">Update</a></td>
+      <td><a class="btn btn-danger btn-lg" href="{% url 'news_delete_url' slug=field.id %}" role="button">Delete</a></td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+    {% if request.user.is_authenticated and request.user.username != 'Player_writer' %}
+    <tr><td><a class="btn btn-primary btn-lg" href=" {% url 'news_create_url' %} " role="button">Add New</a></td><td></td><td></td></tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}

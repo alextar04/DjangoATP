@@ -1,0 +1,33 @@
+{% extends 'basepage.html' %}
+
+{% block background %}
+      <style> body { background: url("/static/background1.jpg"); background-size: cover;} </style> 
+{% endblock %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block content %}
+	<p style="text-align:center"><font size="5" color="White" face="Arial Black">Entrance to system</font></p>
+  
+  <form action= "{% url 'login_url' %}" method="post">
+    {% csrf_token %}
+
+    <div class="form-group" style="width: 20%; margin: auto" >
+    <label for="login"><font color="White">Username:</font></label>
+    <input type="text" class="form-control" id = "login" name = "login", placeholder = "Login"></input>
+    </div>
+
+    <div class="form-group" style="width: 20%; margin: auto">
+    <label for="text"><font color="White">Password:</font></label>
+    <input type="password" class="form-control" id = "password" name = "password", placeholder = "Password"></input>
+	{% if error %}
+		<label for="text"><font color="White">{{ error }}</font></label>
+	{% endif %}
+    </div>
+
+ 
+    <p></p><center><button type="submit" class="btn btn-primary btn-lg" >Sign in</button> <a class="btn btn-primary btn-lg" href=" {% url 'start' %}" role="button">Cancel</a></center>
+  </form>
+{% endblock %}

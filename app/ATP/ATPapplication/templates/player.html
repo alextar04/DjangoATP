@@ -1,0 +1,167 @@
+{% extends 'basepage.html' %}
+
+{% block background %}
+      <style> body { background: url("/static/background1.jpg"); background-size: cover;} </style> 
+{% endblock %}
+
+{% block title %}
+  {% for item in player %}
+      {{item.fio}}
+  {% endfor %}
+{% endblock %}
+
+{% block content %}
+<p></p>
+{% for item in player %}
+<div class="card text-white bg-dark mb-3" style="max-width: 700px; margin: auto">
+  <div class="row no-gutters">
+    <div class="col-md-7">
+      {% load static %}
+      <img src="{% static item.photo %}" class="card-img" display=inline-block height=280 alt="...">
+    </div>
+      <div class="card-body">
+        <h5 class="card-title">{{item.fio}}</h5>
+        <p class="card-text">Nationality: {{item.nationality}}</p>
+        <p class="card-text">ATP Ranking: {{item.positionrating}}</p>
+        <p class="card-text">Points: {{item.countpoints}}</p>
+        <p class="card-text">Age: {{item.agedatebirth}}</p>
+        <p>{% load static %}<img src="{% static item.flag %}" class="img" width="50" height="25" alt="..."> {% if request.user.is_authenticated and request.user.username != 'News_writer'%}<a class="btn btn-warning btn-lg" href="{% url 'player_update_url' slug=item.id %}" style="width: 100px;height:25px;line-height: 5px;" role="button">Update</a>{% endif %}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Information about competition -->
+<table class="table table-striped table-dark" style="width: 50%; margin: auto">
+  <thead class="thead-dark">
+  </thead>
+  <tbody>
+    <tr>
+      {% for grandslam in grandslams %}
+        {% if grandslam.id == 1%}
+        <th scope="col">{% load static %}<img src="{% static grandslam.flag %}" class="img" width="40" height="20" alt="..."> Australian Open</th>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% for game in games %}
+      {% if game.grandslamtournament.id == 1%}
+      <tr>
+      <td>{{game.numberround}}</td>
+      <td>{{game.date}}<p>{{game.time}}</p></td>
+      <td>{% load static %}<img src="{% static game.player1.flag %}" class="img" width="40" height="20" alt="..."> <a href=" {% url 'player_url' slug=game.player1.fio %} " style="color: white">{{game.player1.fio}}</a><p>{% load static %}<img src="{% static game.player2.flag %}" class="img" width="40" height="20" alt="..."> <a href=" {% url 'player_url' slug=game.player2.fio %} " style="color: white">{{game.player2.fio}}</a></p></td>
+      <td>{% for item in game.scoreAsTwoList.0 %}
+          {% if forloop.counter == 1 %}
+            <a><font color="DarkGray">{{item}}</font></a>
+          {% else %}
+            <a>{{item}}</a>
+          {% endif %}
+        {% endfor %}
+        <p>
+          {% for item in game.scoreAsTwoList.1 %}
+          {% if forloop.counter == 1 %}
+            <a><font color="DarkGray">{{item}}</font></a>
+          {% else %}
+            <a>{{item}}</a>
+          {% endif %}
+        {% endfor %}
+        </p></td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+          {% for grandslam in grandslams %}
+        {% if grandslam.id == 2%}
+        <th scope="col">{% load static %}<img src="{% static grandslam.flag %}" class="img" width="40" height="20" alt="..."> Roland Garros</th>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% for game in games %}
+      {% if game.grandslamtournament.id == 2%}
+      <tr>
+      <td>{{game.numberround}}</td>
+      <td>{{game.date}}<p>{{game.time}}</p></td>
+      <td>{% load static %}<img src="{% static game.player1.flag %}" class="img" width="40" height="20" alt="..."> <a href=" {% url 'player_url' slug=game.player1.fio %} " style="color: white">{{game.player1.fio}}</a><p>{% load static %}<img src="{% static game.player2.flag %}" class="img" width="40" height="20" alt="..."> <a href=" {% url 'player_url' slug=game.player2.fio %} " style="color: white">{{game.player2.fio}}</a></p></td>
+      <td>{% for item in game.scoreAsTwoList.0 %}
+          {% if forloop.counter == 1 %}
+            <a><font color="DarkGray">{{item}}</font></a>
+          {% else %}
+            <a>{{item}}</a>
+          {% endif %}
+        {% endfor %}
+        <p>
+          {% for item in game.scoreAsTwoList.1 %}
+          {% if forloop.counter == 1 %}
+            <a><font color="DarkGray">{{item}}</font></a>
+          {% else %}
+            <a>{{item}}</a>
+          {% endif %}
+        {% endfor %}
+        </p></td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+          {% for grandslam in grandslams %}
+        {% if grandslam.id == 3%}
+        <th scope="col">{% load static %}<img src="{% static grandslam.flag %}" class="img" width="40" height="20" alt="..."> Wimbledon</th>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% for game in games %}
+      {% if game.grandslamtournament.id == 3%}
+      <tr>
+      <td>{{game.numberround}}</td>
+      <td>{{game.date}}<p>{{game.time}}</p></td>
+      <td>{% load static %}<img src="{% static game.player1.flag %}" class="img" width="40" height="20" alt="..."> <a href=" {% url 'player_url' slug=game.player1.fio %} " style="color: white">{{game.player1.fio}}</a><p>{% load static %}<img src="{% static game.player2.flag %}" class="img" width="40" height="20" alt="..."> <a href=" {% url 'player_url' slug=game.player2.fio %} " style="color: white">{{game.player2.fio}}</a></p></td>
+      <td>{% for item in game.scoreAsTwoList.0 %}
+          {% if forloop.counter == 1 %}
+            <a><font color="DarkGray">{{item}}</font></a>
+          {% else %}
+            <a>{{item}}</a>
+          {% endif %}
+        {% endfor %}
+        <p>
+          {% for item in game.scoreAsTwoList.1 %}
+          {% if forloop.counter == 1 %}
+            <a><font color="DarkGray">{{item}}</font></a>
+          {% else %}
+            <a>{{item}}</a>
+          {% endif %}
+        {% endfor %}
+        </p></td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+          {% for grandslam in grandslams %}
+        {% if grandslam.id == 4%}
+        <th scope="col">{% load static %}<img src="{% static grandslam.flag %}" class="img" width="40" height="20" alt="..."> US Open</th>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% for game in games %}
+      {% if game.grandslamtournament.id == 4%}
+      <tr>
+      <td>{{game.numberround}}</td>
+      <td>{{game.date}}<p>{{game.time}}</p></td>
+      <td>{% load static %}<img src="{% static game.player1.flag %}" class="img" width="40" height="20" alt="..."> <a href=" {% url 'player_url' slug=game.player1.fio %} " style="color: white">{{game.player1.fio}}</a><p>{% load static %}<img src="{% static game.player2.flag %}" class="img" width="40" height="20" alt="..."> <a href=" {% url 'player_url' slug=game.player2.fio %} " style="color: white">{{game.player2.fio}}</a></p></td>
+      <td>{% for item in game.scoreAsTwoList.0 %}
+          {% if forloop.counter == 1 %}
+            <a><font color="DarkGray">{{item}}</font></a>
+          {% else %}
+            <a>{{item}}</a>
+          {% endif %}
+        {% endfor %}
+        <p>
+          {% for item in game.scoreAsTwoList.1 %}
+          {% if forloop.counter == 1 %}
+            <a><font color="DarkGray">{{item}}</font></a>
+          {% else %}
+            <a>{{item}}</a>
+          {% endif %}
+        {% endfor %}
+        </p></td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+ </tbody>
+</table>
+<p></p>
+{% endfor %}
+{% endblock %}

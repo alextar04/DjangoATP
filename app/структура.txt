@@ -1,0 +1,9 @@
+папка APP-родитель - контейнер проекта
+
+#Для миграций (после подключения БД)
+python manage.py migrate
+#Запуск сервера
+python manage.py runserver 5000
+
+'python manage.py inspectdb' создаст классы по всем существующим таблицам бд. 
+'python manage.py inspectdb > models.py'сохранит все классы в модель.

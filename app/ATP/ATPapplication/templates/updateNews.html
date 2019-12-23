@@ -1,0 +1,36 @@
+{% extends 'basepage.html' %}
+
+{% block background %}
+      <style> body { background: url("/static/aobackground.jpg"); background-size: cover;} </style> 
+{% endblock %}
+
+  {% block title %}
+      Update News
+  {% endblock %}
+
+{% block content %}
+<p style="text-align:center"><font size="5" color="White" face="Arial Black">Update your news here</font></p>
+
+{% for field in news %}
+  <form action= "{% url 'news_update_url' slug=field.id %}" method="post">
+    {% csrf_token %}
+
+    <div class="form-group" style="width: 50%; margin: auto" >
+    <label for="shortdescription"></label>
+    <textarea type="text" class="form-control" id = "shortdescription" name = "shortdescription", rows="2" >{{ news.0.shortDescription }}</textarea>
+    </div>
+
+    <div class="form-group" style="width: 50%; margin: auto">
+    <label for="text"></label>
+    <textarea type="text" class="form-control" id = "text" name = "text", rows="7" >{{ news.0.textnews }}</textarea>
+    </div>
+
+    <div class="form-group" style="width: 50%; margin: auto">
+    <label for="photo"></label>
+    <textarea type="text" class="form-control" id = "photo" name = "photo", rows="2" >{{ news.0.photo }}</textarea>
+    </div>
+ 
+    <p></p><center><button type="submit" class="btn btn-primary btn-lg" >OK</button> <a class="btn btn-primary btn-lg" href=" {% url 'all_news_url' %}" role="button">Cancel</a></center>
+  </form>
+{% endfor %}
+{% endblock %}

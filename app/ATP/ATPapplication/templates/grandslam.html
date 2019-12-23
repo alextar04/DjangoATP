@@ -1,0 +1,108 @@
+{% extends 'basepage.html' %}
+
+{% block title %}
+  {% for item in grandslam %}
+      {{item.name}}
+  {% endfor %}
+{% endblock %}
+
+{% block background %}
+    {% for item in grandslam %}
+    {% if item.id == 1 %}
+      <style> body { background: url("/static/aoBackground.jpg");background-size: cover; } </style> 
+    {% endif %}
+    {% if item.id == 2 %}
+      <style> body { background: url("/static/frBackground.jpg");background-size: cover; } </style> 
+    {% endif %}
+    {% if item.id == 3 %}
+      <style> body { background: url("/static/wbBackground.jpg");background-size: cover; } </style> 
+    {% endif %}
+    {% if item.id == 4 %}
+      <style> body { background: url("/static/usBackground.jpg");background-size: cover; } </style> 
+    {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+{% for item in grandslam %}
+<section class="jumbotron text-center" >
+    <div class="container">
+      <h1>{{item.name}}</h1>
+      <p class="lead text-muted">{{ item.description }}</p>
+      <p>
+        <button type="button" class="btn btn-outline-secondary">Place: {{ item.place }}</button>
+        <button type="button" class="btn btn-outline-secondary">Dates: {{ item.dates }}</button>
+        <button type="button" class="btn btn-outline-secondary">Participants: {{ item.numberparticipants }}</button>
+        <button type="button" class="btn btn-outline-secondary">Cover: {{ item.cover }}</button>
+        <button type="button" class="btn btn-outline-secondary">Prize: ${{ item.prize }}</button>
+      </p>
+    </div>
+  </section>
+{% endfor %}
+
+<table class="table table-striped table-dark" style="width: 50%; margin: auto">
+  <thead class="thead-dark">
+      <tr>
+  <th>
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Group</button>
+    <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="#">All rounds</a>
+        <a class="dropdown-item" href="{% url 'fourRound_url' slug=grandslam.0.name %}">4 round</a>
+        <a class="dropdown-item" href="{% url 'quaterfinal_url' slug=grandslam.0.name %}">1/4 Finals</a>
+        <a class="dropdown-item" href="{% url 'semifinal_url' slug=grandslam.0.name %}">1/2 Finals</a>
+        <a class="dropdown-item" href="{% url 'final_url' slug=grandslam.0.name %}">Finals</a>
+    </div>
+</div>
+  </th>
+  <th><a class="btn btn-outline-info" href="{% url 'convert_csv_url' slug=grandslam.0.name %}">Export to CSV</a></th>
+  <th></th>
+  <th></th>
+  </tr>
+    <tr>
+      <th scope="col">Number round</th>
+      <th scope="col">Date & Time</th>
+      <th scope="col"></th>
+      <th scope="col">Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for game in games %}
+      <tr>
+      <td>{{game.numberround}}</td>
+      <td>{{game.date}}<p>{{game.time}}</p></td>
+      <td>{% load static %}<img src="{% static game.player1.flag %}" class="img" width="40" height="20" alt="..."> <a href=" {% url 'player_url' slug=game.player1.fio %} " style="color: white">{{game.player1.fio}}</a><p>{% load static %}<img src="{% static game.player2.flag %}" class="img" width="40" height="20" alt="..."> <a href=" {% url 'player_url' slug=game.player2.fio %} " style="color: white">{{game.player2.fio}}</a></p></td>
+      <td>
+        {% for item in game.scoreAsTwoList.0 %}
+          {% if forloop.counter == 1 %}
+            <a><font color="DarkGray">{{item}}</font></a>
+          {% else %}
+            <a>{{item}}</a>
+          {% endif %}
+        {% endfor %}
+        <p>
+          {% for item in game.scoreAsTwoList.1 %}
+          {% if forloop.counter == 1 %}
+            <a><font color="DarkGray">{{item}}</font></a>
+          {% else %}
+            <a>{{item}}</a>
+          {% endif %}
+        {% endfor %}
+        </p>
+      </td>
+    </tr>
+    {% endfor %}
+ </tbody>
+</table>
+
+<p></p>
+ <div class="card-deck" style="margin: auto">
+  {% for stadium in stadiums %}
+    <div class="card text-white bg-secondary mb-3" style="max-width: 25rem; margin: auto">
+      <h5 class="card-title" style="text-align:center">{{stadium.name}}</h5>
+      {% load static %}
+      <img src="{% static stadium.picture %}" class="card-img-top" alt="...">
+    </div>
+  {% endfor%}
+  </div>
+{% endblock %}

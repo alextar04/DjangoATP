@@ -1,0 +1,56 @@
+{% extends 'basepage.html' %}
+
+{% block background %}
+      <style> body { background: url("/static/aobackground.jpg"); background-size: cover;} </style> 
+{% endblock %}
+
+  {% block title %}
+      Update Player
+  {% endblock %}
+
+{% block content %}
+<p style="text-align:center"><font size="5" color="White" face="Arial Black">Update your player here</font></p>
+
+{% for field in player %}
+  <form action= "{% url 'player_update_url' slug=field.id %}" method="post">
+    {% csrf_token %}
+
+    <div class="form-group" style="width: 50%; margin: auto">
+    <label for="fio"></label>
+    <textarea type="text" class="form-control" id = "fio" name = "fio", rows="2" >{{ player.0.fio }}</textarea>
+    </div>
+
+    <div class="form-group" style="width: 50%; margin: auto">
+    <label for="agedatebirth"></label>
+    <textarea type="text" class="form-control" id = "agedatebirth" name = "agedatebirth", rows="2" >{{ player.0.agedatebirth }}</textarea>
+    </div>
+
+    <div class="form-group" style="width: 50%; margin: auto">
+    <label for="photo"></label>
+    <textarea type="text" class="form-control" id = "photo" name = "photo", rows="2" >{{ player.0.photo }}</textarea>
+    </div>
+
+    <div class="form-group" style="width: 50%; margin: auto">
+    <label for="positionrating"></label>
+    <textarea type="text" class="form-control" id = "positionrating" name = "positionrating", rows="2" >{{ player.0.positionrating }}</textarea>
+    </div>
+    
+    <div class="form-group" style="width: 50%; margin: auto">
+    <label for="nationality"></label>
+    <textarea type="text" class="form-control" id = "nationality" name = "nationality", rows="2" >{{ player.0.nationality }}</textarea>
+    </div>
+
+    <div class="form-group" style="width: 50%; margin: auto">
+    <label for="flag"></label>
+    <textarea type="text" class="form-control" id = "flag" name = "flag", rows="2" >{{ player.0.flag }}</textarea>
+    </div>
+
+    <div class="form-group" style="width: 50%; margin: auto">
+    <label for="countpoints"></label>
+    <textarea type="text" class="form-control" id = "countpoints" name = "countpoints", rows="2" >{{ player.0.countpoints }}</textarea>
+    </div>
+ 
+    <p></p><center><button type="submit" class="btn btn-primary btn-lg" >OK</button> <a class="btn btn-primary btn-lg" href=" {% url 'player_url' slug=field.fio %}" role="button">Cancel</a></center>
+  </form>
+{% endfor %}
+{% endblock %}
