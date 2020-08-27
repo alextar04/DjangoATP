@@ -19,7 +19,9 @@ Technologies:
 
 Screenshots:
 
+<p align="center">
 ![Иллюстрация к проекту](https://github.com/alextar04/DjangoATP/raw/master/app/ATP/ATPapplication/static//gitPicture1.png)
+</p>
 
 ![Иллюстрация к проекту](https://github.com/alextar04/DjangoATP/raw/master/app/ATP/ATPapplication/static//gitPicture2.png)
 
